@@ -41,6 +41,6 @@ public class Platform : MonoBehaviour
     private void ActivateParticleEffect(Collider other)
     {
         GameObject particleGO = Instantiate(particle, transform.position + new Vector3(0, 0.5f, 0), particle.transform.rotation);
-        particleGO.GetComponent<ParticleSystem>().startColor = other.GetComponent<Renderer>().material.color;
+        // particleGO.GetComponent<ParticleSystem>().startColor = other.GetComponent<Renderer>().material.color;
     }
 }

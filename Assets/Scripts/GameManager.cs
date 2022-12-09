@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip successSFX;
 
     private bool levelCompleted = false;
+    public int leveltoUnlock;
+    private int numberofUnlockedLevels;
 
     private void Awake()
     {
@@ -40,14 +42,19 @@ public class GameManager : MonoBehaviour
     private void LevelCompleted()
     {
         DisableShooters();
-
         nextLevel.SetActive(true);
         
         if (isSoundOn)
         {
             audioSource.PlayOneShot(successSFX, 1f);
         }
-        LoadNextLevel();
+        // LoadNextLevel();
+
+        numberofUnlockedLevels = PlayerPrefs.GetInt("levelsUnlocked");
+
+        if(numberofUnlockedLevels <= leveltoUnlock){
+            PlayerPrefs.SetInt("levelsUnlocked", numberofUnlockedLevels + 1);
+        }
     }
 
     private static void DisableShooters()
@@ -74,6 +81,5 @@ public class GameManager : MonoBehaviour
     {
         isSoundOn = toggle;
         soundOnButton.SetActive(toggle);
-        soundOffButton.SetActive(!toggle);
     }
 }
